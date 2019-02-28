@@ -129,14 +129,14 @@ def addBlocking():
             line = ""
     fp.close()
 
-    f = open(path,"r")
-    line_1 = f.readlines()
-    # while line:
-    #     line = line + "\n" + f.readline();
-    f.close()
-    a = len(data[key])
+    # f = open(path,"r")
+    # line_1 = f.readlines()
+    # # while line:
+    # #     line = line + "\n" + f.readline();
+    # f.close()
+    # a = len(data[key])
 
-    return jsonify(line_1)
+    return jsonify(request.json)
 
 
 
