@@ -64,6 +64,7 @@ heroku url : https://csc301-yangsiq1.herokuapp.com/actor.html
 	For Jenny’s stories: Screen always display the newest blocking information.
 
 #JSON
+
 	script_get_data.json
 
 	I use the dictionary to store whole data that I want.In the first dictionary, I have two keys "1" and "2", and this represent the part number, in order to make my life easier on the later steps. I can easily know which part of script I'm getting. Then the value of each key would be the same format, I create another dictionary to be the value.In the second dictionary, I have keys to represent the actor's id which is I read from actors.csv, the value for these key would be the position and the actor name. Also, I have the entry to represent the start position and end position for current part. Finally I have the entire script sentence. I use the start and end position to cut the sentence in right place.
