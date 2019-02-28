@@ -1,0 +1,18 @@
+{
+      "1":{
+           "Claudius":"Claudius-2",
+             "Hamlet": "Hamlet-5",
+             "end":31,
+             "start":0
+            },
+       "2":{
+           "Claudius": "Claudius-3",
+             "Hamlet": "Hamlet-0",
+             "end":58,
+             "start":32
+            },
+       "script": "That's it Claudius, I'm leaving!Fine! Oh..he left already..",
+       "scriptNum": "1"
+
+
+}

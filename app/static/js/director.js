@@ -81,13 +81,58 @@ setScriptNumber('example')
 
 function getBlocking() {
 	const scriptNumber = scriptNumText.value;
+	removeAllBlocks();
 	setScriptNumber(scriptNumber)
 	console.log(`Get blocking for script number ${scriptNumber}`)
-
 	console.log('Getting ')
+	
 	/// Make a GET call (using fetch()) to get your script and blocking info from the server,
 	// and use the functions above to add the elements to the browser window.
 	// (similar to actor.js)
+	const url = '/script/' + scriptNumber;
+	let count = 1;
+	let count_acotrs = 1;
+	var actors = new Array();
+	var position = new Array();
+	let test = ""
+	 fetch(url)
+    	.then((res) => { 
+    		//// Do not write any code here
+	        return res.json()
+	        //// Do not write any code here
+	    })
+	    .then((jsonResult) => {
+	    	// This is where the JSON result (jsonResult) from the server can be accessed and used.
+	    	
+	    	for (let i = 0; i < Object.keys(jsonResult).length; i ++) {
+	        // Use the JSON to add a script part
+	        // addScriptPart(jsonResult[number]["script"], jsonResult[number]["start"],
+	        // 	jsonResult[number]["end"], jsonResult[number][actorNumber][0])
+	        	var part = jsonResult["" + count];
+	        	for(let j = 0; j <  Object.keys(part).length-3; j ++) {
+	        		actors.push(part["" + count_acotrs][1]);
+	        		position.push(part["" + count_acotrs][0])
+	        		count_acotrs ++;
+	        		
+	        	}
+	        	count_acotrs = 1;
+	        	var script = part["script"];
+	        	var start = part["start"];
+	        	var end = part["end"];
+	        	addBlockToScreen(script,start,end,actors,position);	        	
+	        	count++;
+	        	actors.pop();
+	        	actors.pop();
+	        	position.pop();
+	        	position.pop();
+	    	}
+	       
+	        
+	    }).catch((error) => {
+	    	// if an error occured it will be logged to the JavaScript console here.
+	        console.log("An error occured with fetch:", error)
+	    })	
+
 
 }
 
@@ -99,13 +144,40 @@ function changeScript() {
 
     // The data we are going to send in our request
     // It is a Javascript Object that will be converted to JSON
+    
+
     let data = {
     	scriptNum: getScriptNumber()
     	// What else do you need to send to the server?    
-
-
-
     }
+
+    var screen_data = getBlockingDetailsOnScreen();
+    let script = "";
+    var actors_p = new Array()
+    var part = new Array()
+    var count = 0;
+    for (let i = 0; i < screen_data.length; i ++) {
+    	var str = screen_data[i]["text"];
+    	script = script + str.substring(1,str.length-1);
+    	data[i+1] = {};
+    	data[i+1]["start"] = count;
+    	count = count + str.substring(1,str.length-1).length-1;
+    	data[i+1]["end"] = count;
+    	count++;
+    	var actors = screen_data[i]["actors"];
+    	for(let j = 0; j < actors.length; j++) {
+    		var set = actors[j][0] + "-" + actors[j][1];
+    		data[i+1][actors[j][0]] = set;
+    	}
+    	
+    	
+    }
+    // console.log(a);
+    // console.log(script);
+    // console.log(screen_data);
+
+    data["script"] = script; 
+    console.log(data);
 
     // Create the request constructor with all the parameters we need
     const request = new Request(url, {

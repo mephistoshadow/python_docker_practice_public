@@ -1,0 +1,17 @@
+{
+	"1":{
+	         "1":[5,"Hamlet"],
+             "2":[2,"Claudius"],
+             "end":31,
+             "start":0,
+             "script":"That's it Claudius, I'm leaving!Fine! Oh..he left already.."
+            },
+       "2":{
+	         "1":[0,"Hamlet"],
+             "2":[3,"Claudius"],
+             "end":58,
+             "start":32,
+             "script":"That's it Claudius, I'm leaving!Fine! Oh..he left already.."
+            }
+
+}

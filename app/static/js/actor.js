@@ -55,6 +55,39 @@ function getBlocking() {
 	console.log(`Get blocking for script number ${scriptNumber} for actor ${actorNumber}`)
 
 	/* Add code below to get JSON from the server and display it appropriately. */
+	let count = 1;
+	const url = '/script/' + scriptNumber;
+	 fetch(url)
+    	.then((res) => { 
+    		//// Do not write any code here
+	        return res.json()
+	        //// Do not write any code here
+	    })
+	    .then((jsonResult) => {
+	    	// This is where the JSON result (jsonResult) from the server can be accessed and used.
+	    	console.log('Result:', jsonResult)
+	    	for (let i = 0; i < Object.keys(jsonResult).length; i ++) {
+	        // Use the JSON to add a script part
+	        // addScriptPart(jsonResult[number]["script"], jsonResult[number]["start"],
+	        // 	jsonResult[number]["end"], jsonResult[number][actorNumber][0])
+
+	        	var part = jsonResult["" + count];
+	        	var script = part["script"];
+	        	var start = part["start"];
+	        	var end = part["end"];
+	        	var position_list = part["" + actorNumber];
+	        	var postion = position_list[0];
+	        	addScriptPart(script,start,end,postion);
+	        	console.log();
+	        	count++;
+	    	}
+	        
+	       
+	        
+	    }).catch((error) => {
+	    	// if an error occured it will be logged to the JavaScript console here.
+	        console.log("An error occured with fetch:", error)
+	    })	
 
 
 
